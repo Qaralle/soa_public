@@ -91,6 +91,7 @@ public class StudyGroup {
     }
 
     @Column(name = "education_form")
+    @Enumerated(EnumType.STRING)
     public FormOfEducation getFormOfEducation() {
         return formOfEducation;
     }
@@ -100,6 +101,7 @@ public class StudyGroup {
     }
 
     @Column(name = "semester")
+    @Enumerated(EnumType.STRING)
     public Semester getSemesterEnum() {
         return semesterEnum;
     }

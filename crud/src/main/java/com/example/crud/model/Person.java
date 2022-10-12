@@ -57,6 +57,7 @@ public class Person extends BaseEntity<Long> {
     }
 
     @Column(name = "hair_color")
+    @Enumerated(EnumType.STRING)
     public Color getHairColor() {
         return hairColor;
     }
@@ -66,6 +67,7 @@ public class Person extends BaseEntity<Long> {
     }
 
     @Column(name = "nationality")
+    @Enumerated(EnumType.STRING)
     public Country getNationality() {
         return nationality;
     }

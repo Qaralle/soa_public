@@ -1,7 +1,5 @@
 package com.example.crud.dto;
 
-import com.example.crud.model.StudyGroup;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -12,23 +10,23 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.NONE)
 public class StudyGroupList {
     @XmlElement
-    private List<StudyGroup> groups;
+    private List<StudyGroupResponseDto> groups;
     @XmlElement
-    private int totalSize;
+    private Long totalSize;
 
-    public List<StudyGroup> getGroups() {
+    public List<StudyGroupResponseDto> getGroups() {
         return groups;
     }
 
-    public void setGroups(List<StudyGroup> groups) {
+    public void setGroups(List<StudyGroupResponseDto> groups) {
         this.groups = groups;
     }
 
-    public int getTotalSize() {
+    public Long getTotalSize() {
         return totalSize;
     }
 
-    public void setTotalSize(int totalSize) {
+    public void setTotalSize(Long totalSize) {
         this.totalSize = totalSize;
     }
 }

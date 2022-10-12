@@ -1,6 +1,8 @@
 package com.example.crud.controller;
 
 import com.example.crud.dto.ErrorResponse;
+import com.example.crud.service.exception.EmptyCollectionException;
+import com.example.crud.service.exception.NotFoundByIdException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -10,8 +12,8 @@ import static com.example.crud.util.ResponseBuilder.buildErrorResponse;
 
 public abstract class AbstractController {
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(IllegalArgumentException e) {
+    @ExceptionHandler(NotFoundByIdException.class)
+    public ResponseEntity<ErrorResponse> handleIllegalArgumentException(NotFoundByIdException e) {
         return buildErrorResponse(e.getMessage(), 404);
     }
 
@@ -20,4 +22,13 @@ public abstract class AbstractController {
         return buildErrorResponse(e.getMessage(), 400);
     }
 
+    @ExceptionHandler(EmptyCollectionException.class)
+    public ResponseEntity handleEmptyCollectionException(EmptyCollectionException e) {
+        return ResponseEntity.noContent().build();
+    }
+
+    @ExceptionHandler(NoSuchMethodException.class)
+    public ResponseEntity handleNoSuchMethodException(NoSuchMethodException e) {
+        return buildErrorResponse("invalid data type: "+ e.getMessage(), 400);
+    }
 }

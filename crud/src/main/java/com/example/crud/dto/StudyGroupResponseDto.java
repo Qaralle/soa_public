@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @XmlRootElement(name = "studyGroupResponseDto")
 @XmlAccessorType(XmlAccessType.NONE)

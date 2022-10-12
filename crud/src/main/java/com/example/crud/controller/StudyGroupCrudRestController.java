@@ -4,7 +4,6 @@ import com.example.crud.dto.StudyGroupFilter;
 import com.example.crud.dto.StudyGroupList;
 import com.example.crud.dto.StudyGroupRequestDto;
 import com.example.crud.dto.StudyGroupResponseDto;
-import com.example.crud.model.StudyGroup;
 import com.example.crud.service.StudyGroupCrudService;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +11,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Min;
-import java.util.List;
 
 @Validated
 @RestController
-@RequestMapping(value = "/university/groups",
+@RequestMapping(value = "/groups",
                 produces = "application/xml")
 public class StudyGroupCrudRestController extends AbstractController{
     private final StudyGroupCrudService studyGroupCrudService;
@@ -38,11 +36,20 @@ public class StudyGroupCrudRestController extends AbstractController{
         return ResponseEntity.ok(studyGroupCrudService.getGroupById(id));
     }
 
-    @GetMapping(value = "")
-    public ResponseEntity<StudyGroupList> getAll(StudyGroupFilter filter) {
-        StudyGroupList list = new StudyGroupList();
-        list.setGroups(studyGroupCrudService.getAll(filter).getContent());
-        list.setTotalSize(1);
-        return ResponseEntity.ok(list);
+    @PostMapping(value = "/filter")
+    public ResponseEntity<StudyGroupList> getAll(@RequestBody StudyGroupFilter filter) {
+        return ResponseEntity.ok(studyGroupCrudService.getAll(filter));
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<StudyGroupResponseDto> update(@Min(1L) @PathVariable Long id,
+                                                        @RequestBody StudyGroupRequestDto requestDto) {
+        return ResponseEntity.ok(studyGroupCrudService.update(id, requestDto));
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity delete(@Min(1L) @PathVariable Long id) {
+        studyGroupCrudService.delete(id);
+        return ResponseEntity.accepted().build();
     }
 }
